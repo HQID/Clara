@@ -4,8 +4,31 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AuthController;
 
-Route::get('/', [DashboardController::class, "index"])->name('dashboard');
+Route::get('/', function () {
+    return redirect()->route('login');
+})->name('home');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+
+Route::middleware('can:admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
+});
+
+Route::middleware('can:user')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::prefix('mobil')->group(function () {
     Route::get('/', [MobilController::class, "index"])->name('mobil.index');
