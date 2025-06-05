@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -22,12 +23,17 @@ Route::get('/register', function () {
 
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
-Route::middleware('can:admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
-});
+Route::middleware('auth')->group(function () {
+    Route::middleware('can:admin')->prefix('admin')->group(function () {
+        Route::get('/', [DashboardController::class, 'adminIndex'])->name('admin.dashboard');
+    });
 
-Route::middleware('can:user')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::middleware('can:user')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::prefix('mobil')->group(function () {
@@ -48,3 +54,5 @@ Route::prefix('review')->group(function () {
     Route::get('/show/{id}', [ReviewController::class, 'show'])->name('review.show');
     Route::delete('/delete/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
 });
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

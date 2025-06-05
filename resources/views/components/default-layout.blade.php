@@ -16,25 +16,45 @@
     <div class="container mx-auto px-5 py-3 flex flex-wrap items-center justify-between">
         <!-- Logo & Brand -->
         <a href="/" class="flex items-center space-x-2">
-            <!-- <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-10 h-10" /> -->
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-10 h-10" />
             <span class="text-2xl font-bold text-orange-600">Carla</span>
         </a>
 
         <!-- Menu -->
         <div id="menu" class="w-full md:flex md:items-center md:w-auto hidden">
-            <ul class="flex flex-col md:flex-row md:space-x-6 font-semibold text-lg">
+            <ul class="flex flex-col md:flex-row md:space-x-6 font-semibold text-lg mr-4">
                 <li><a href="/" class="block py-2 hover:text-orange-600">Dashboard</a></li>
                 <li><a href="/mobil" class="block py-2 hover:text-orange-600">Mobils</a></li>
-                <li><a href="/review" class="block py-2 hover:text-orange-600">Reviews</a></li>
+                <li><a href="/review" class="block py-2 hover:text-orange-600">My Reviews</a></li>
             </ul>
 
-            <!-- Search Form -->
-            <form class="flex items-center mt-3 md:mt-0 md:ml-6">
-                <input type="text" placeholder="Search"
-                       class="border border-gray-300 rounded px-3 py-1 mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-                <button type="submit"
-                        class="bg-gray-800 text-white px-3 py-1 rounded hover:bg-gray-700">Search</button>
-            </form>
+            <!-- User Dropdown -->
+            <div class="relative mt-3 md:mt-0 md:ml-6 z-10">
+                <button id="user-menu-button" class="flex items-center space-x-2 focus:outline-none">
+                    <div class="border-2 rounded-full">
+                        <img src="{{ asset('https://images.icon-icons.com/3054/PNG/512/account_profile_user_icon_190494.png') }}" alt="User Logo" class="w-8 h-8 rounded-full">
+                    </div>
+                    
+                    <span class="hidden md:block font-semibold">{{ Auth::user()->name }}</span>
+                </button>
+                <div id="user-menu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded shadow-lg hidden">
+                    <ul class="py-1">
+                        <li><a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="block px-4 py-2 hover:bg-gray-100 w-full text-left">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <script>
+                document.getElementById('user-menu-button').addEventListener('click', function () {
+                    const menu = document.getElementById('user-menu');
+                    menu.classList.toggle('hidden');
+                });
+            </script>
         </div>
     </div>
 </nav>
