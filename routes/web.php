@@ -36,14 +36,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
-Route::prefix('mobil')->group(function () {
-    Route::get('/', [MobilController::class, "index"])->name('mobil.index');
-    Route::get('/create', [MobilController::class, "create"])->name('mobil.create');
-    Route::post('/store', [MobilController::class, "store"])->name('mobil.store');
-    Route::get('/edit/{id}', [MobilController::class, "edit"])->name('mobil.edit');
-    Route::put('/update/{id}', [MobilController::class, "update"])->name('mobil.update');
-    Route::get('/show/{id}', [MobilController::class, "show"])->name('mobil.show');
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/mobil', [MobilController::class, 'adminIndex'])->name('mobil.index');
+    Route::get('/mobil/create', [MobilController::class, 'create'])->name('mobil.create');
+    Route::post('/mobil', [MobilController::class, 'store'])->name('mobil.store');
+    Route::get('/mobil/{id}/edit', [MobilController::class, 'edit'])->name('mobil.edit');
+    Route::put('/mobil/{id}', [MobilController::class, 'update'])->name('mobil.update');
+    Route::delete('/mobil/{id}', [MobilController::class, 'destroy'])->name('mobil.destroy');
 });
+
+Route::get('/mobil', [MobilController::class, 'index'])->name('mobil.index');
+Route::get('/mobil/{id}', [MobilController::class, 'show'])->name('mobil.show');
 
 Route::prefix('review')->group(function () {
     Route::get('/', [ReviewController::class, 'index'])->name('review.index');

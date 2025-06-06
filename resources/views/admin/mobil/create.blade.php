@@ -1,7 +1,7 @@
-<x-default-layout title="Tambah Mobil" section_title="Tambah Mobil">
+<x-admin-layout title="Tambah Mobil" section_title="Tambah Mobil">
     <section class="container mx-auto px-4 py-10">
         <h2 class="text-3xl font-bold text-orange-600 mb-4">Tambah Mobil</h2>
-        <form action="{{ route('mobil.store') }}" method="POST" class="bg-white shadow rounded-lg p-6 space-y-4">
+        <form action="{{ route('admin.mobil.store') }}" method="POST" class="bg-white shadow rounded-lg p-6 space-y-4">
             @csrf
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Nama Mobil</label>
@@ -22,4 +22,4 @@
             <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Simpan</button>
         </form>
     </section>
-</x-default-layout>
+</x-admin-layout>

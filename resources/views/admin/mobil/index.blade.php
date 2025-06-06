@@ -1,7 +1,10 @@
-<x-default-layout title="Daftar Mobil" section_title="Daftar Mobil">
+<x-admin-layout title="Daftar Mobil" section_title="Daftar Mobil">
     <section class="container mx-auto px-4 py-10">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-3xl font-bold text-orange-600 mb-4">Daftar Mobil</h2>
+            <div class="mb-6">
+                <a href="{{ route('admin.mobil.create') }}" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Tambah Mobil</a>
+            </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -15,11 +18,16 @@
                     </div>
                     <div class="mt-2">
                         <p class="font-bold text-gray-800">Rp{{ $mobil->price }}/hari</p>
-                        <a href="{{ route('mobil.show', $mobil->id) }}" class="mt-2 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Detail</a>
+                        <a href="{{ route('admin.mobil.edit', $mobil->id) }}" class="mt-2 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded mr-2">Edit</a>
+                        <form action="{{ route('admin.mobil.destroy', $mobil->id) }}" method="POST" class="inline-block mt-2">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Hapus</button>
+                        </form>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
     </section>
-</x-default-layout>
+</x-admin-layout>

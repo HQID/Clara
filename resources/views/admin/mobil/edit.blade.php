@@ -1,7 +1,7 @@
-<x-default-layout title="Edit Mobil" section_title="Edit Mobil">
+<x-admin-layout title="Edit Mobil" section_title="Edit Mobil">
     <section class="container mx-auto px-4 py-10">
         <h2 class="text-3xl font-bold text-orange-600 mb-4">Edit Mobil</h2>
-        <form action="{{ route('mobil.update', $mobil->id) }}" method="POST" class="bg-white shadow rounded-lg p-6 space-y-4">
+        <form action="{{ route('admin.mobil.update', $mobil->id) }}" method="POST" class="bg-white shadow rounded-lg p-6 space-y-4">
             @csrf
             @method('PUT')
             <div>
@@ -23,4 +23,4 @@
             <button type="submit" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Simpan Perubahan</button>
         </form>
     </section>
-</x-default-layout>
+</x-admin-layout>
