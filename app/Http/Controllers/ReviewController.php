@@ -17,10 +17,11 @@ class ReviewController extends Controller
         return view('review.index', compact('reviews'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $mobils = Mobil::all();
-        return view('review.create', compact('mobils'));
+        $mobil_id = $request->query('mobil_id');
+        return view('review.create', compact('mobils', 'mobil_id'));
     }
 
     public function store(Request $request)
@@ -32,8 +33,8 @@ class ReviewController extends Controller
             'mobil_id' => 'required|exists:mobils,id',
         ]);
 
-        Review::create($request->all());
-        return redirect()->route('review.index');
+        $review = Review::create($request->all());
+        return redirect()->route('mobil.show', ['id' => $review->mobil_id]);
     }
 
     public function edit($id)
@@ -49,12 +50,11 @@ class ReviewController extends Controller
             'name' => 'required|string|max:255',
             'review' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
-            'mobil_id' => 'required|exists:mobils,id',
         ]);
 
         $review = Review::findOrFail($id);
-        $review->update($request->all());
-        return redirect()->route('review.index');
+        $review->update($request->except('mobil_id'));
+        return redirect()->route('review.index')->with('success', 'Review berhasil diperbarui.');
     }
 
     public function show($id)
