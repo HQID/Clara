@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Mobil;
 
 class ReviewController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $reviews = Review::with('mobil')->get();
@@ -65,5 +68,20 @@ class ReviewController extends Controller
         $review = Review::findOrFail($id);
         $review->delete();
         return redirect()->route('review.index')->with('success', 'Review berhasil dihapus.');
+    }
+
+    public function adminIndex()
+    {
+        $this->authorize('admin');
+        $reviews = Review::with('mobil')->get();
+        return view('admin.review.index', compact('reviews'));
+    }
+
+    public function adminDestroy($id)
+    {
+        $this->authorize('admin');
+        $review = Review::findOrFail($id);
+        $review->delete();
+        return redirect()->route('admin.review.index')->with('success', 'Review berhasil dihapus.');
     }
 }

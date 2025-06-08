@@ -45,6 +45,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/mobil/{id}', [MobilController::class, 'destroy'])->name('mobil.destroy');
 });
 
+Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/review', [ReviewController::class, 'adminIndex'])->name('review.index');
+    Route::delete('/review/{id}', [ReviewController::class, 'adminDestroy'])->name('review.destroy');
+});
+
 Route::get('/mobil', [MobilController::class, 'index'])->name('mobil.index');
 Route::get('/mobil/{id}', [MobilController::class, 'show'])->name('mobil.show');
 
