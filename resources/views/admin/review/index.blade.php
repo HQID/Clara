@@ -4,7 +4,7 @@
             @foreach ($reviews as $review)
             <div class="bg-white shadow rounded-lg p-4">
                 <div class="flex justify-between items-center mb-4">
-                    <h5 class="text-lg font-semibold text-gray-800">{{ $review->name }}</h5>
+                    <h5 class="text-lg font-semibold text-gray-800">{{ $review->user->name }}</h5>
                     <p class="text-gray-500">{{ $review->updated_at->format('d M Y, H:i') }}</p>
                 </div>
                 <p class="text-gray-600 mt-2">{{ $review->review }}</p>
@@ -18,7 +18,7 @@
                     <form action="{{ route('admin.review.destroy', $review->id) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Apakah Anda yakin ingin menghapus ulasan ini?')">Hapus</button>
+                        <button type="submit" class="text-red-600 hover:underline cursor-pointer" onclick="return confirm('Apakah Anda yakin ingin menghapus ulasan ini?')">Hapus</button>
                     </form>
                 </div>
             </div>

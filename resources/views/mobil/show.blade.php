@@ -5,7 +5,13 @@
             <div class="p-6">
                 <h2 class="text-3xl font-bold text-gray-800">{{ $mobil->name }}</h2>
                 <p class="text-gray-600 mt-4">{{ $mobil->desc }}</p>
-                <p class="text-gray-800 font-bold mt-4">Harga: {{ $mobil->price }}</p>
+                <p class="text-gray-800 font-bold mt-4">Harga: Rp{{ $mobil->price }}/hari</p>
+                <p class="text-gray-800 font-bold mt-4">
+                    Status: 
+                    <span class="px-3 py-1 rounded-full {{ $mobil->status === 'tersedia' ? 'bg-green-300 text-green-600' : 'bg-yellow-300 text-yellow-600' }}">
+                        {{ ucfirst($mobil->status) }}
+                    </span>
+                </p>
                 <a href="#" class="mt-4 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Sewa Mobil</a>
             </div>
         </div>

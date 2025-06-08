@@ -13,7 +13,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        $reviews = Review::with('mobil')->get();
+        $reviews = Review::with('mobil', 'user')->where('user_id', auth()->id())->get();
         return view('review.index', compact('reviews'));
     }
 
@@ -27,13 +27,12 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
             'review' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
             'mobil_id' => 'required|exists:mobils,id',
         ]);
 
-        $review = Review::create($request->all());
+        $review = Review::create(array_merge($request->all(), ['user_id' => auth()->id()]));
         return redirect()->route('mobil.show', ['id' => $review->mobil_id]);
     }
 
@@ -47,13 +46,12 @@ class ReviewController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
             'review' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
         $review = Review::findOrFail($id);
-        $review->update($request->except('mobil_id'));
+        $review->update($request->except(['mobil_id', 'user_id']));
         return redirect()->route('review.index')->with('success', 'Review berhasil diperbarui.');
     }
 
@@ -73,7 +71,7 @@ class ReviewController extends Controller
     public function adminIndex()
     {
         $this->authorize('admin');
-        $reviews = Review::with('mobil')->get();
+        $reviews = Review::with('mobil', 'user')->get();
         return view('admin.review.index', compact('reviews'));
     }
 

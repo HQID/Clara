@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mobil extends Model
 {
-    protected $fillable = ['name', 'desc', 'price', 'img'];
+    protected $fillable = ['name', 'desc', 'price', 'img', 'status'];
 
     public function reviews()
     {

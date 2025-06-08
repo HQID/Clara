@@ -6,6 +6,7 @@ use App\Http\Controllers\MobilController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -48,6 +49,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/review', [ReviewController::class, 'adminIndex'])->name('review.index');
     Route::delete('/review/{id}', [ReviewController::class, 'adminDestroy'])->name('review.destroy');
+});
+
+// Admin User Management
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 Route::get('/mobil', [MobilController::class, 'index'])->name('mobil.index');

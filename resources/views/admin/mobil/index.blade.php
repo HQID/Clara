@@ -18,12 +18,21 @@
                     </div>
                     <div class="mt-2">
                         <p class="font-bold text-gray-800">Rp{{ $mobil->price }}/hari</p>
-                        <a href="{{ route('admin.mobil.edit', $mobil->id) }}" class="mt-2 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded mr-2">Edit</a>
-                        <form action="{{ route('admin.mobil.destroy', $mobil->id) }}" method="POST" class="inline-block mt-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">Hapus</button>
-                        </form>
+                        <p class="inline-block mt-2 px-2 py-1 rounded-full text-sm font-semibold {{ $mobil->status === 'tersedia' ? 'bg-green-300 text-green-600' : 'bg-yellow-300 text-yellow-600' }}">
+                            {{ ucfirst($mobil->status) }}
+                        </p>
+                        <div class="mt-1">
+                            <a href="{{ route('admin.mobil.edit', $mobil->id) }}" class="mt-2 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded mr-2">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ route('admin.mobil.destroy', $mobil->id) }}" method="POST" class="inline-block mt-2">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded cursor-pointer">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

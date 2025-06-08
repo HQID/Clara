@@ -26,7 +26,7 @@
                     <li><a href="/admin/users" class="block px-4 py-2 hover:bg-orange-700">Users</a></li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="block px-4 py-2 hover:bg-orange-700 w-full text-left">Logout</button>
+                            <button type="submit" class="block px-4 py-2 hover:bg-orange-700 w-full text-left cursor-pointer">Logout</button>
                         </form>
                     </li>
                 </ul>

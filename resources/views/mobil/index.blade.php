@@ -6,7 +6,7 @@
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach ($mobils as $mobil)
-            <div class="bg-white shadow rounded-lg overflow-hidden flex flex-col">
+            <div class="bg-white shadow rounded-lg overflow-hidden flex flex-col cursor-pointer" onclick="window.location='{{ route('mobil.show', $mobil->id) }}'">
                 <img src="{{ $mobil->img }}" class="w-full h-48 object-cover" alt="{{ $mobil->name }}">
                 <div class="p-4 flex-1 flex flex-col justify-between">
                     <div>
@@ -15,7 +15,9 @@
                     </div>
                     <div class="mt-2">
                         <p class="font-bold text-gray-800">Rp{{ $mobil->price }}/hari</p>
-                        <a href="{{ route('mobil.show', $mobil->id) }}" class="mt-2 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Detail</a>
+                        <p class="inline-block mt-3 px-3 py-1 rounded-full text-sm font-semibold {{ $mobil->status === 'tersedia' ? 'bg-green-300 text-green-600' : 'bg-yellow-300 text-yellow-600' }}">
+                            {{ ucfirst($mobil->status) }}
+                        </p>
                     </div>
                 </div>
             </div>

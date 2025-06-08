@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('desc');
             $table->string('price');
             $table->string('img');
+            $table->enum('status', ['tersedia', 'tersewa'])->default('tersedia');
             $table->timestamps();
         });
     }

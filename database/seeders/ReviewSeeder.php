@@ -14,7 +14,7 @@ class ReviewSeeder extends Seeder
     {
         DB::table('reviews')->insert([
             [
-                'name' => 'Jane Doe',
+                'user_id' => 2,
                 'review' => 'Mobil yang sangat nyaman dan irit bahan bakar.',
                 'rating' => 5,
                 'mobil_id' => 1,
@@ -22,7 +22,7 @@ class ReviewSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => 'John Smith',
+                'user_id' => 2,
                 'review' => 'Sangat puas dengan performa mobil ini, cocok untuk perjalanan jauh.',
                 'rating' => 4,
                 'mobil_id' => 2,
@@ -30,7 +30,7 @@ class ReviewSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Fadhil Akmal',
+                'user_id' => 2,
                 'review' => 'Mobil keluarga yang sangat luas dan nyaman.',
                 'rating' => 5,
                 'mobil_id' => 3,
@@ -38,7 +38,7 @@ class ReviewSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Fandi Samaga',
+                'user_id' => 2,
                 'review' => 'SUV yang tangguh dan cocok untuk segala medan.',
                 'rating' => 4,
                 'mobil_id' => 4,
@@ -46,7 +46,7 @@ class ReviewSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Raiyan Brown',
+                'user_id' => 2,
                 'review' => 'Mobil ekonomis dengan fitur yang cukup lengkap.',
                 'rating' => 4,
                 'mobil_id' => 5,
