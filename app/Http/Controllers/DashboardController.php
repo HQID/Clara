@@ -20,6 +20,9 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard.user');
+        $mobils = Mobil::inRandomOrder()->take(4)->get();
+        $reviews = Review::inRandomOrder()->take(4)->get();
+
+        return view('dashboard.user', compact('mobils', 'reviews'));
     }
 }
