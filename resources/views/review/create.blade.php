@@ -5,10 +5,6 @@
             @csrf
             <input type="hidden" name="mobil_id" value="{{ request('mobil_id') }}">
             <div class="mb-4">
-                <label for="name" class="block text-gray-700 font-bold mb-2">Nama</label>
-                <input type="text" id="name" name="name" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 p-2">
-            </div>
-            <div class="mb-4">
                 <label for="review" class="block text-gray-700 font-bold mb-2">Ulasan</label>
                 <textarea id="review" name="review" rows="4" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-orange-500 focus:border-orange-500 p-2"></textarea>
             </div>

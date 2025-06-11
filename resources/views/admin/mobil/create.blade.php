@@ -13,7 +13,7 @@
             </div>
             <div>
                 <label for="price" class="block text-sm font-medium text-gray-700">Harga</label>
-                <input type="text" id="price" name="price" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2">
+                <input type="number" id="price" name="price" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2" min="0" step="1000">
             </div>
             <div>
                 <label for="img" class="block text-sm font-medium text-gray-700">URL Gambar</label>

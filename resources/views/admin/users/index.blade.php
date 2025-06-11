@@ -1,8 +1,8 @@
 <x-admin-layout title="Admin User Management" section_title="Daftar Pengguna">
     <section class="container mx-auto px-4 py-10">
+        <h2 class="text-3xl font-bold text-orange-600 mb-4">Daftar User</h2>
         <div class="space-y-6">
             <div class="bg-white shadow rounded-lg p-6">
-                <h2 class="text-2xl font-bold mb-4">Users</h2>
                 <table class="w-full border-collapse border border-gray-300">
                     <thead>
                         <tr class="bg-gray-100">

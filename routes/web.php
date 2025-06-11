@@ -7,6 +7,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransactionController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -49,25 +50,32 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/review', [ReviewController::class, 'adminIndex'])->name('review.index');
     Route::delete('/review/{id}', [ReviewController::class, 'adminDestroy'])->name('review.destroy');
+    Route::get('/transaction', [TransactionController::class, 'adminIndex'])->name('transactions.index');
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::put('/transaction/{id}/complete', [TransactionController::class, 'markAsCompleted'])->name('transaction.complete');
 });
 
-// Admin User Management
-Route::prefix('admin')->middleware('auth')->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/mobil', [MobilController::class, 'index'])->name('mobil.index');
+    Route::get('/mobil/{id}', [MobilController::class, 'show'])->name('mobil.show');
+
+    Route::prefix('review')->group(function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('review.index');
+        Route::get('/create', [ReviewController::class, 'create'])->name('review.create');
+        Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
+        Route::get('/edit/{id}', [ReviewController::class, 'edit'])->name('review.edit');
+        Route::put('/update/{id}', [ReviewController::class, 'update'])->name('review.update');
+        Route::get('/show/{id}', [ReviewController::class, 'show'])->name('review.show');
+        Route::delete('/delete/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
+    });
 });
 
-Route::get('/mobil', [MobilController::class, 'index'])->name('mobil.index');
-Route::get('/mobil/{id}', [MobilController::class, 'show'])->name('mobil.show');
-
-Route::prefix('review')->group(function () {
-    Route::get('/', [ReviewController::class, 'index'])->name('review.index');
-    Route::get('/create', [ReviewController::class, 'create'])->name('review.create');
-    Route::post('/store', [ReviewController::class, 'store'])->name('review.store');
-    Route::get('/edit/{id}', [ReviewController::class, 'edit'])->name('review.edit');
-    Route::put('/update/{id}', [ReviewController::class, 'update'])->name('review.update');
-    Route::get('/show/{id}', [ReviewController::class, 'show'])->name('review.show');
-    Route::delete('/delete/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+    Route::put('/transactions/{id}', [TransactionController::class, 'update'])->name('transactions.update');
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

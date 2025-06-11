@@ -1,5 +1,6 @@
 <x-admin-layout title="Admin Review Management" section_title="Daftar Ulasan">
     <section class="container mx-auto px-4 py-10">
+        <h2 class="text-3xl font-bold text-orange-600 mb-4">Daftar Ulasan</h2>
         <div class="space-y-6">
             @foreach ($reviews as $review)
             <div class="bg-white shadow rounded-lg p-4">

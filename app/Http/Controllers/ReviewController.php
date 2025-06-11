@@ -32,7 +32,10 @@ class ReviewController extends Controller
             'mobil_id' => 'required|exists:mobils,id',
         ]);
 
-        $review = Review::create(array_merge($request->all(), ['user_id' => auth()->id()]));
+        $reviewData = $request->all();
+        $reviewData['user_id'] = auth()->id();
+
+        $review = Review::create($reviewData);
         return redirect()->route('mobil.show', ['id' => $review->mobil_id]);
     }
 

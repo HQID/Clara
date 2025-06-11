@@ -12,7 +12,9 @@
                         {{ ucfirst($mobil->status) }}
                     </span>
                 </p>
-                <a href="#" class="mt-4 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Sewa Mobil</a>
+                @if($mobil->status === 'tersedia')
+                    <a href="{{ route('transactions.create', ['mobil_id' => $mobil->id]) }}" class="mt-4 inline-block bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded">Sewa Mobil</a>
+                @endif
             </div>
         </div>
     </section>

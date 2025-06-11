@@ -26,6 +26,7 @@
                 <li><a href="/" class="block py-2 hover:text-orange-600">Dashboard</a></li>
                 <li><a href="/mobil" class="block py-2 hover:text-orange-600">Mobils</a></li>
                 <li><a href="/review" class="block py-2 hover:text-orange-600">My Reviews</a></li>
+                <li><a href="/transactions" class="block py-2 hover:text-orange-600">My Transactions</a></li>
             </ul>
 
             <!-- User Dropdown -->
@@ -81,7 +82,8 @@
                 <ul class="space-y-1">
                     <li><a href="/" class="hover:text-white">Dashboard</a></li>
                     <li><a href="/mobil" class="hover:text-white">Mobils</a></li>
-                    <li><a href="/review" class="hover:text-white">Reviews</a></li>
+                    <li><a href="/review" class="hover:text-white">My Reviews</a></li>
+                    <li><a href="/transactions" class="hover:text-white">My Transactions</a></li>
                 </ul>
             </div>
             <!-- Sosial Media -->
@@ -95,7 +97,7 @@
             </div>
         </div>
         <hr class="my-6 border-gray-700" />
-        <p class="text-center text-sm">&copy; 2025 Rental Mobil. All Rights Reserved.</p>
+        <p class="text-center text-sm">&copy; 2025 Carla. All Rights Reserved.</p>
     </div>
 </footer>
 <!-- FOOTER END -->
