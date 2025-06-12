@@ -19,6 +19,7 @@
                             <td class="border border-gray-300 px-4 py-2">{{ $user->name }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $user->email }}</td>
                             <td class="border border-gray-300 px-4 py-2">
+                                @if($user->role !== 'admin')
                                 <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" class="flex justify-center">
                                     @csrf
                                     @method('DELETE')
@@ -26,6 +27,7 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -56,7 +56,10 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group
     Route::put('/transaction/{id}/complete', [TransactionController::class, 'markAsCompleted'])->name('transaction.complete');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'can:user'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::get('/mobil', [MobilController::class, 'index'])->name('mobil.index');
     Route::get('/mobil/{id}', [MobilController::class, 'show'])->name('mobil.show');
 
@@ -69,9 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/show/{id}', [ReviewController::class, 'show'])->name('review.show');
         Route::delete('/delete/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
     });
-});
 
-Route::middleware('auth')->group(function () {
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');

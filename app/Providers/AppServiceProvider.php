@@ -28,11 +28,5 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'user';
         });
 
-        // Fallback for unauthorized access
-        Gate::before(function ($user, $ability) {
-            if ($user->role === 'admin') {
-                return true; // Admins have access to all abilities
-            }
-        });
     }
 }
